@@ -1,7 +1,6 @@
 package Square.squareRenderers;
 
 import Square.ImageRepository;
-import io.ResourceRetriever;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
