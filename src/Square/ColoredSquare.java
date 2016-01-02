@@ -1,7 +1,6 @@
 package Square;
 
 import Square.squareRenderers.DefaultSwingRenderer;
-import io.ResourceRetriever;
 
 import java.awt.*;
 
@@ -14,8 +13,8 @@ public class ColoredSquare extends Square {
     /**
      * @param color The color for this square.
      */
-    public ColoredSquare(Color color, ResourceRetriever resourceRetreiver) {
-        super(new DefaultSwingRenderer(color.getFilename(), resourceRetreiver));
+    public ColoredSquare(Color color) {
+        super(new DefaultSwingRenderer(color.getFilename()));
     }
 
     @Override

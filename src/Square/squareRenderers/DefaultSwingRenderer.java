@@ -26,10 +26,8 @@ public class DefaultSwingRenderer extends SquareRenderer {
      * Creates a new swing renderer.
      *
      * @param filename The filename of the resource that will be written by this renderer.
-     * @param resourceRetriever The resource retriever where the filename's resource can be obtained.
      */
-    public DefaultSwingRenderer(String filename, ResourceRetriever resourceRetriever) {
-        super(resourceRetriever);
+    public DefaultSwingRenderer(String filename) {
         this.filename = filename;
     }
 

@@ -29,20 +29,6 @@ public abstract class SquareRenderer {
     protected static final ImageRepository imageRepository = ImageRepository.getInstance();
 
     /**
-     * The resource retriever that will be used to extract the image.
-     */
-    protected final ResourceRetriever resourceRetriever;
-
-    /**
-     * Constructs a new SquareRenderer.
-     *
-     * @param resourceRetriever The ResourceRetriever that will be used by this renderer.
-     */
-    public SquareRenderer(ResourceRetriever resourceRetriever) {
-        this.resourceRetriever = resourceRetriever;
-    }
-
-    /**
      * Performs the render.
      */
     public abstract boolean render(Graphics graphics, int xLocation, int yLocation, int width, int height);
@@ -79,11 +65,11 @@ public abstract class SquareRenderer {
      */
     protected BufferedImage getImageFromResources(String filename) throws IOException, MissingResourceException {
         // read in the image for manipulation
-        URL url = resourceRetriever.retrievePath(filename);
+        URL url = getClass().getClassLoader().getResource(filename);
 
         // check if the url is null, meaning that the resource could not be obtained
         if(url == null) {
-            throw new MissingResourceException("Unable to open resource file: " + filename, Class.class.getName(), filename);
+            throw new MissingResourceException("Unable to open resource file: " + filename, getClass().getName(), filename);
         }
 
         // return the BufferedImage

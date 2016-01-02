@@ -1,7 +1,6 @@
 package Square;
 
 import Square.ColoredSquare.Color;
-import Square.Factories.ColoredSquareFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,6 @@ public class SquareGrid {
      * Initializes the SquareGrid with default squares (display transparent space only).
      */
     private void initializeEmptyGrid() {
-        ColoredSquareFactory factory = new ColoredSquareFactory();
 
         int color = 0;
         for(int y = 0; y < height; y++) {
@@ -53,7 +51,7 @@ public class SquareGrid {
 
             for(int x = 0; x < width; x++) {
                 // create the new square and add it to the grid
-                squareGrid.get(y).add(factory.createColoredSquare(Color.values()[color]));
+                squareGrid.get(y).add(new ColoredSquare(Color.values()[color]));
 
                 color++;
 
