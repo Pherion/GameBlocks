@@ -1,6 +1,7 @@
 package Square.squareRenderers;
 
 import Square.ImageRepository;
+import io.ResourceRetriever;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -10,7 +11,9 @@ import java.net.URL;
 import java.util.MissingResourceException;
 
 /**
- * 
+ * Represents an abstract square renderer.  Provides utility methods for extracting images from resources,
+ * and adjusting them for optimal display.
+ *
  * Created by fraca_000 on 1/2/2016.
  */
 public abstract class SquareRenderer {
@@ -24,6 +27,20 @@ public abstract class SquareRenderer {
      * Static reference to the image repository.
      */
     protected static final ImageRepository imageRepository = ImageRepository.getInstance();
+
+    /**
+     * The resource retriever that will be used to extract the image.
+     */
+    protected final ResourceRetriever resourceRetriever;
+
+    /**
+     * Constructs a new SquareRenderer.
+     *
+     * @param resourceRetriever The ResourceRetriever that will be used by this renderer.
+     */
+    public SquareRenderer(ResourceRetriever resourceRetriever) {
+        this.resourceRetriever = resourceRetriever;
+    }
 
     /**
      * Performs the render.
@@ -50,15 +67,26 @@ public abstract class SquareRenderer {
         return newImage;
     }
 
+    /**
+     * Extracts image from resources.
+     *
+     * @param filename The filename to extract.
+     *
+     * @return A buffered image from the resource file provided.
+     *
+     * @throws IOException If there is a problem reading in the file.
+     * @throws MissingResourceException If there is a problem locating the file in the resources.
+     */
     protected BufferedImage getImageFromResources(String filename) throws IOException, MissingResourceException {
         // read in the image for manipulation
-        URL url = getClass().getClassLoader().getResource(filename);
+        URL url = resourceRetriever.retrievePath(filename);
 
         // check if the url is null, meaning that the resource could not be obtained
         if(url == null) {
             throw new MissingResourceException("Unable to open resource file: " + filename, Class.class.getName(), filename);
         }
 
+        // return the BufferedImage
         return ImageIO.read(url);
     }
 }

@@ -1,11 +1,12 @@
 package Square;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents a map of Images.  This class is designed to remove the need for reading in an image file from resources
+ * every time it is needed.
  *
  * Created by fraca_000 on 1/2/2016.
  */
@@ -22,14 +23,16 @@ public class ImageRepository {
         return instance;
     }
 
+    /**
+     * The map of images and their keys.
+     */
     private Map<String, BufferedImage> imageMap = new HashMap<>();
 
     /**
      * Private constructor to prevent instantiation.
      * Initializes the map containing images.
      */
-    private ImageRepository() {
-    }
+    private ImageRepository() { }
 
     /**
      * Places the provided image into the map with the given key.  If the key already exists, this returns false,
@@ -37,6 +40,7 @@ public class ImageRepository {
      *
      * @param key The image's key.
      * @param image The image.
+     *
      * @return TRUE if the image was added to the map, FALSE if it was not
      */
     public boolean put(String key, BufferedImage image) {
@@ -53,6 +57,7 @@ public class ImageRepository {
 
     /**
      * @param key The key for which to obtain an image.
+     *
      * @return The image referenced by the key, or NULL if the key does not exist.
      */
     public BufferedImage get(String key) {
@@ -61,6 +66,7 @@ public class ImageRepository {
 
     /**
      * @param key The key to look for.
+     *
      * @return TRUE if the key exists, FALSE otherwise.
      */
     public boolean contains(String key) {

@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Test application for blocks.
  *
  * Created by fraca_000 on 1/1/2016.
  */
