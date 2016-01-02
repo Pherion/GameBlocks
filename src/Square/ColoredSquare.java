@@ -2,7 +2,10 @@ package Square;
 
 import Square.squareRenderers.DefaultSwingRenderer;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Represents a colored square
@@ -10,11 +13,19 @@ import java.awt.*;
  * Created by fraca_000 on 1/2/2016.
  */
 public class ColoredSquare extends Square {
+    private Color color;
+
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 7561871881650263368L;
+
     /**
      * @param color The color for this square.
      */
     public ColoredSquare(Color color) {
         super(new DefaultSwingRenderer(color.getFilename()));
+        this.color = color;
     }
 
     @Override
@@ -57,5 +68,16 @@ public class ColoredSquare extends Square {
         public String getFilename() {
             return filename;
         }
+    }
+
+    @Override
+    public void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeObject(color);
+    }
+
+    @Override
+    public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        color = (Color)in.readObject();
+        setRenderer(new DefaultSwingRenderer(color.getFilename()));
     }
 }

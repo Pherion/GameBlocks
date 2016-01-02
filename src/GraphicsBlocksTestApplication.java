@@ -1,8 +1,10 @@
 import Square.SquareGrid;
 import gameView.GameViewRenderer;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import java.awt.Graphics2D;
 
 /**
  * Test application for blocks.

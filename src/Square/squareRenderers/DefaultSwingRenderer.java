@@ -1,6 +1,8 @@
 package Square.squareRenderers;
 
-import java.awt.*;
+import io.ResourceRetriever;
+
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -43,7 +45,7 @@ public class DefaultSwingRenderer extends SquareRenderer {
             } else {
                 // extract the image from resources
                 try {
-                    image = getImageFromResources(filename);
+                    image = ResourceRetriever.getInstance().getImageFromResources(filename);
                 } catch (IOException e) {
                     throw new IllegalStateException("Unable to open resource: " + filename);
                 }

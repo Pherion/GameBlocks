@@ -2,14 +2,18 @@ package Square;
 
 import Square.squareRenderers.SquareRenderer;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Represents a single square on the Game View.
  *
  * Created by fraca_000 on 12/31/2015.
  */
-public abstract class Square {
+public abstract class Square implements Serializable {
     /**
      * The square renderer that will be used to render this square.
      */
@@ -37,5 +41,29 @@ public abstract class Square {
      */
     public abstract boolean render(Graphics graphics, int xLocation, int yLocation, int width, int height);
 
+    /**
+     * @param renderer Sets the renderer.
+     */
+    public void setRenderer(SquareRenderer renderer) {
+        this.renderer = renderer;
+    }
 
+    /**
+     * Writes the Square to an output stream for serialization.
+     *
+     * @param out The output stream.
+     *
+     * @throws IOException If there is an issue writing the object.
+     */
+    public abstract void writeObject(ObjectOutputStream out) throws IOException ;
+
+    /**
+     * Reads the Square in from a serialized input stream.
+     *
+     * @param in The input stream.
+     *
+     * @throws IOException If there is an error with the input stream.
+     * @throws ClassNotFoundException If the input stream does not represent an object of the apropriate type.
+     */
+    public abstract void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException;
 }

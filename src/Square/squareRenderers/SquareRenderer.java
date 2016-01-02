@@ -2,12 +2,11 @@ package Square.squareRenderers;
 
 import Square.ImageRepository;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
+import java.awt.Transparency;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-import java.util.MissingResourceException;
 
 /**
  * Represents an abstract square renderer.  Provides utility methods for extracting images from resources,
@@ -52,26 +51,5 @@ public abstract class SquareRenderer {
         return newImage;
     }
 
-    /**
-     * Extracts image from resources.
-     *
-     * @param filename The filename to extract.
-     *
-     * @return A buffered image from the resource file provided.
-     *
-     * @throws IOException If there is a problem reading in the file.
-     * @throws MissingResourceException If there is a problem locating the file in the resources.
-     */
-    protected BufferedImage getImageFromResources(String filename) throws IOException, MissingResourceException {
-        // read in the image for manipulation
-        URL url = getClass().getClassLoader().getResource(filename);
 
-        // check if the url is null, meaning that the resource could not be obtained
-        if(url == null) {
-            throw new MissingResourceException("Unable to open resource file: " + filename, getClass().getName(), filename);
-        }
-
-        // return the BufferedImage
-        return ImageIO.read(url);
-    }
 }

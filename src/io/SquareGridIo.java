@@ -8,7 +8,7 @@ import java.net.URL;
 /**
  * Created by fraca_000 on 1/2/2016.
  */
-public class SquareGridIo {
+public class SquareGridIO {
     public static SquareGrid read(URL fileLocation) throws IOException {
         SquareGrid grid = new SquareGrid(1, 1);
 

@@ -2,7 +2,7 @@ package gameView;
 
 import Square.SquareGrid;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 /**
  * Renderer for a game view.
