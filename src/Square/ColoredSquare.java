@@ -6,13 +6,14 @@ import java.awt.Graphics;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Represents a colored square
  *
  * Created by fraca_000 on 1/2/2016.
  */
-public class ColoredSquare extends Square {
+public class ColoredSquare extends Square implements Serializable {
     private Color color;
 
     /**

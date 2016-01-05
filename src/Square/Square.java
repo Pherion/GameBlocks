@@ -2,18 +2,18 @@ package Square;
 
 import Square.squareRenderers.SquareRenderer;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
- * Represents a single square on the Game View.
+ * Represents a single square on the Game View.  Sub classes must implement serializable, and use the
+ * setRenderer(...) method to complete deserialization of the object.
  *
  * Created by fraca_000 on 12/31/2015.
  */
-public abstract class Square implements Serializable {
+public abstract class Square {
     /**
      * The square renderer that will be used to render this square.
      */
@@ -27,6 +27,11 @@ public abstract class Square implements Serializable {
     protected Square(SquareRenderer renderer) {
         this.renderer = renderer;
     }
+
+    /**
+     * Default constructor for deserialization.
+     */
+    protected Square() {}
 
     /**
      * Renders the given Square.

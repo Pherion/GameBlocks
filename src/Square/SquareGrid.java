@@ -2,6 +2,10 @@ package Square;
 
 import Square.ColoredSquare.Color;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +14,12 @@ import java.util.List;
  *
  * Created by fraca_000 on 1/1/2016.
  */
-public class SquareGrid {
+public class SquareGrid implements Serializable {
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 3923601115015969510L;
+
     /**
      * Grid of Square objects.
      */
@@ -44,7 +53,6 @@ public class SquareGrid {
      * Initializes the SquareGrid with default squares (display transparent space only).
      */
     private void initializeEmptyGrid() {
-
         int color = 0;
         for(int y = 0; y < height; y++) {
             squareGrid.add(new ArrayList<>());
@@ -117,5 +125,42 @@ public class SquareGrid {
      */
     public int getHeight() {
         return height;
+    }
+
+    public void writeObject(ObjectOutputStream out) throws IOException {
+        // write out the height of the grid
+        out.writeObject(height);
+
+        // write out the width of the row
+        out.writeObject(width);
+
+        // loop through the rows
+        for(int y = 0; y < height; y++) {
+            // loop through the columns of each row
+            for(int x = 0; x < width; x++) {
+                // write out the square object that the given location
+                out.writeObject(squareGrid.get(y).get(x));
+            }
+        }
+    }
+
+    public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        // read in the height of the grid
+        height = (int)in.readObject();
+
+        // read in the width of the rows
+        width = (int)in.readObject();
+
+        // loop through the rows
+        for(int y = 0; y < height; y++) {
+            // add a new array list to the squareGrid
+            squareGrid.add(new ArrayList<>());
+
+            // loop through the columns for the current row
+            for(int x = 0; x < width; x++) {
+                // read in the square object at this location
+                squareGrid.get(y).add((ColoredSquare)in.readObject());
+            }
+        }
     }
 }
